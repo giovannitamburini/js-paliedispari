@@ -90,43 +90,82 @@ Dichiariamo chi ha vinto.*/
 
 // - chiedo all'utente di scegliere tra pari e dispari e memorizzo
 let evenOddElement = document.getElementById('even-odd');
+
 // - chiedo all'utente di scegliere un numero compreso tra 1 e 5 e memorizzo
 let fiveElement = document.getElementById('five');
-// - creo un evento click per memorizzare il valore inserito negli input
+
+// - creo il collegamento con il button che mi servirà per l'evento click
 let playElement = document.getElementById('play');
 
+// - creo il collegamento con l'emento all'interno del quale appenderò i risultati del gioco
+let winnerContainerElement = document.getElementById('winner-container');
+
+// - creo un evento click per memorizzare il valore inserito negli input
 playElement.addEventListener('click', function() {
 
+    //prendo il valore inserito dall'utente nell'input
     let insideEvenOddElement = evenOddElement.value;
 
+    //prendo il valore inserito dall'utente nell'input
     let insideFiveElement = fiveElement.value;
 
+    // - condizione di verifica dell'inserimento corretto della scelta(pari/dispari)
     if (insideEvenOddElement === "pari" || insideEvenOddElement === "dispari") {
         
+        // - condizione di verifica dell'inserimento corretto di un numero tra 1 e 5
         if (insideFiveElement >= 1 && insideFiveElement <= 5) {
 
+            //richiamo la funzione per generare un numero casuale
             let randomPc = generatorRandom(1,5);
+
+            //richiamo la funzione per sommare i numeri(scelto e generato) e verificare l'esito della somma
             let allTogether = generatorAddition(insideFiveElement, randomPc);
 
-            console.log("numero del computer: " + randomPc);
-            console.log("numero scelto: " + insideFiveElement);
-            console.log(allTogether);
+            //creo div all'inetrno del quale è scritto il numero generato casualmente
+            let resultPc = document.createElement('div');
+            resultPc.innerHTML = "numero del computer: " + randomPc;
 
+            //creo div all'inetrno del quale è scritto il numero scelto dall'utente
+            let resultUser = document.createElement('div');
+            resultUser.innerHTML = "numero scelto: " + insideFiveElement;
+
+            //creo div all'interno del quale è scritto il risultato della somma
+            let resultAllTogether = document.createElement('div');
+            resultAllTogether.innerHTML = "la somma dei due numeri è: " + (parseInt(randomPc) + parseInt(insideFiveElement));
+
+            //creo div all'interno del quale è scritta la scelta fatta tra pari e dispari
+            let yourOddEven = document.createElement('div');
+            yourOddEven.innerHTML = "hai scelto: " + insideEvenOddElement;
+            
+            //appendo all'elemento del Dom gli elementi creati
+            winnerContainerElement.append(resultPc, resultUser, resultAllTogether, yourOddEven);
+
+
+            // condizioni che decretano la vittoria
             if ((insideEvenOddElement == "pari" && allTogether == true) || (insideEvenOddElement == "dispari" && allTogether == false)) {
 
-                console.log("hai vinto");
+                //creo e appendo nel dom il risultato positivo del gioco
+                let victory = document.createElement("div");
+                victory.innerHTML= "HAI VINTO";
+                winnerContainerElement.append(victory);
 
+              //condizione di sconfitta
             } else {
 
-                console.log("hai perso");
+                //creo e appendo nel dom il risultato negativo del gioco
+                let victory = document.createElement("div");
+                victory.innerHTML = "HAI PERSO";
+                winnerContainerElement.append(victory);
 
             }
 
+          //condizione di inserimento scorretto del numero
         } else {
 
             alert('inserimento dati non corretto, inserisci un numero compreso tra 1 e 5');
         }
 
+      //condizione di inserimento scorretto di pari o dispari
     } else {
 
         alert('inserimento dati non corretto, scegli pari o dispari');
@@ -136,16 +175,7 @@ playElement.addEventListener('click', function() {
 
 
 
-
-
-
-
-
-
-
-
-
-
+//FUNZIONI
 
 // - tramite funzione, genero un numero casuale che va da 1 a 5 per il computer
 function generatorRandom (min, max) {
@@ -155,7 +185,7 @@ function generatorRandom (min, max) {
     return random;
 }
 
-
+// - tramite funzione, sommo il numero scelto dall'utente con quello generato casualmente dal computere stabilisco se la somma è pari o dispari
 function generatorAddition (myNumber, pcNumber) {
     
     let addition = parseInt(myNumber) + parseInt(pcNumber);
@@ -174,4 +204,12 @@ function generatorAddition (myNumber, pcNumber) {
     return result;
 }
 
+
+//STYLE
+
+//input pari/dispari
+evenOddElement.style.width = "150px";
+
+//input numeri dal 1 al 5
+fiveElement.style.width = "150px"
 

@@ -1,0 +1,9 @@
+input,
+button {
+    margin-bottom: 1em;
+    padding: 1em;
+}
+
+#winner-container div {
+    padding-top: 1em;
+}
