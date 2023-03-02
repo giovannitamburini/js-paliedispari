@@ -95,12 +95,8 @@ let fiveElement = document.getElementById('five');
 // - creo un evento click per memorizzare il valore inserito negli input
 let playElement = document.getElementById('play');
 
-let insideFiveElement;
 
 // - creo una variabile uguale al numero generato dal pc
-let randomPc = generatorRandom(1,5);
-
-let allTogether = generatorAddition(insideFiveElement, randomPc);
 
 
 playElement.addEventListener('click', function() {
@@ -112,6 +108,9 @@ playElement.addEventListener('click', function() {
     if (insideEvenOddElement === "pari" || insideEvenOddElement === "dispari") {
         
         if (insideFiveElement >= 1 && insideFiveElement <= 5) {
+
+            let randomPc = generatorRandom(1,5);
+            let allTogether = generatorAddition(insideFiveElement, randomPc);
 
             console.log(randomPc);
             console.log(allTogether);
@@ -148,7 +147,7 @@ function generatorAddition (myNumber, pcNumber) {
 
     let result ;
 
-    if (addition % 2 == 0) {
+    if (addition % 2 === 0) {
         
         result = true;
 
