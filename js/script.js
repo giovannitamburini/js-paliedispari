@@ -95,10 +95,6 @@ let fiveElement = document.getElementById('five');
 // - creo un evento click per memorizzare il valore inserito negli input
 let playElement = document.getElementById('play');
 
-
-// - creo una variabile uguale al numero generato dal pc
-
-
 playElement.addEventListener('click', function() {
 
     let insideEvenOddElement = evenOddElement.value;
@@ -112,9 +108,28 @@ playElement.addEventListener('click', function() {
             let randomPc = generatorRandom(1,5);
             let allTogether = generatorAddition(insideFiveElement, randomPc);
 
-            console.log(randomPc);
+            console.log("numero del computer: " + randomPc);
+            console.log("numero scelto: " + insideFiveElement);
             console.log(allTogether);
+
+            if ((insideEvenOddElement == "pari" && allTogether == true) || (insideEvenOddElement == "dispari" && allTogether == false)) {
+
+                console.log("hai vinto");
+
+            } else {
+
+                console.log("hai perso");
+
+            }
+
+        } else {
+
+            alert('inserimento dati non corretto, inserisci un numero compreso tra 1 e 5');
         }
+
+    } else {
+
+        alert('inserimento dati non corretto, scegli pari o dispari');
     }
 
 })
@@ -143,11 +158,11 @@ function generatorRandom (min, max) {
 
 function generatorAddition (myNumber, pcNumber) {
     
-    let addition = myNumber + pcNumber;
+    let addition = parseInt(myNumber) + parseInt(pcNumber);
 
     let result ;
 
-    if (addition % 2 === 0) {
+    if (addition % 2 == 0) {
         
         result = true;
 
